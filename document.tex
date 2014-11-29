@@ -2,17 +2,23 @@
 \usepackage{fontspec,fancyhdr,
 ragged2e,blindtext,indentfirst,graphicx,
 xunicode,xltxtra,xgreek,lipsum,siunitx,
-hyphenat,microtype,etoolbox}
+hyphenat,microtype,etoolbox,tocloft}
+%\usepackage[nodayofweek]{datetime}
+\usepackage{datetime}
+%\newdate{date}{}{11}{2014}
+%\date{\displaydate{date}}
 \usepackage[nottoc]{tocbibind}
 \usepackage[shortcuts]{extdash} % hyphernate using dash
 \usepackage[center]{titlesec}
 \usepackage[english,greek]{babel}
-\usepackage[pdftex]{graphicx}
 %\usepackage{showframe}
 \setlength{\parindent}{2em}
+\renewcommand{\cftsecfont}{\scshape} % table of contents subsection smaller size
 %\usepackage{showframe}
+\newdateformat{Mydate}{\monthname[\THEMONTH] \THEYEAR}
 \renewcommand{\baselinestretch}{1.5} % line spacing in a paragraph
-
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for dots in chapters 
+% table of contents
 %\raggedbottom
 % xgreek package required for greek hypernation
 %\usepackage{showframe}
@@ -45,6 +51,9 @@ hyphenat,microtype,etoolbox}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
 \fancyfoot{}
+
+%\cleardoublepage
+%\setcounter{page}{2}
 % \rfoot{\thepage}
 % \fancyfoot[RO]{\leftskip=-0.27in \thepage }
 % \fancyfoot[RE]{\rightskip=5.32in \thepage}
@@ -55,7 +64,11 @@ hyphenat,microtype,etoolbox}
 
 \fancyfoot{\hspace{-1pt}\setlength{\footskip}{20pt}\leftskip=6.32in\fancyplain{}\thepage}
 %\fancyfoot[RE]{\leftskip=6.32in \thepage}
-
+%     \makeatletter
+%     \renewcommand*{\pagenumbering}[2]{%
+%       \gdef\thepage{\csname @#1\endcsname\c@page}%
+%     }
+%     \makeatother
 
 %\renewcommand\headrule{}          %35
 %\footskip = 665pt
@@ -85,11 +98,46 @@ hyphenat,microtype,etoolbox}
 \titlespacing\subsection{6pt}{3 pt plus 6pt minus 3pt}{6 pt plus 3pt minus
 3pt}
 \sloppy
-
+\cleardoublepage
+%\setcounter{page}{3}
 %\title{Sections and Chapters}
 %\makeindex
 \setcounter{secnumdepth}{0}
 \begin{document}
+\begin{titlepage}
+
+\begin{center}
+\Large ΤΕΙ ΚΕΝΤΡΙΚΗΣ ΜΑΚΕΔΟΝΙΑΣ \\
+\large ΣΧΟΛΗ ΤΕΧΝΟΛΟΓΙΚΩΝ ΕΦΑΡΜΟΓΩΝ\\
+ΤΜΗΜΑ ΜΗΧΑΝΙΚΩΝ ΠΛΗΡΟΦΟΡΙΚΗΣ \\
+
+\vspace*{5cm}
+\Huge \,\,\,Ο χουλιγκανισμός στα σχολεία
+
+\large Eργασία στο μάθημα των Παιδαγωγικών
+
+ του 7ου εξαμήνου
+ \vspace*{4cm}
+ 
+NameNameNameNameN - 0000
+
+NameNameNameNameN - 0000
+
+NameNameNameNameN - 0000
+
+NameNameNameNameN - 0000 
+
+ \vspace*{2.5cm}
+ \nopagebreak
+Σέρρες\\
+Νοέμβριος 2014
+
+\end{center}
+
+\end{titlepage}
+%\newgeometry{footskip=0.35in,left=20mm,right=20mm,top=20mm,bottom=35mm}
+%\maketitle
+
 %\maketitle
 %  interwordspace: \the\fontdimen2\font \
 %  interwordstretch: \the\fontdimen3\font \
@@ -113,8 +161,8 @@ hyphenat,microtype,etoolbox}
 \addcontentsline{toc}{chapter}{Ο χουλιγκανισμός στα σχολεία}
 \addcontentsline{toc}{section}{Ορισμός και ετυμολογία του όρου}
 \section*{Ορισμός και ετυμολογία του όρου}
-\indent Ως χουλιγκανισμός, αρχικά, αναφέρεται η ανάρμοστη, βίαιη και
-αντικοινωνική συμπεριφορά οπαδών, αθλητικών ομάδων, που οδηγεί στη διατάραξη της τάξης και συνδέεται με βαθύτερα κοινωνικά
+\indent Ως  χουλιγκανισμός, αρχικά, αναφέρεται η ανάρμοστη,
+βίαιη και αντικοινωνική συμπεριφορά οπαδών, αθλητικών ομάδων, που οδηγεί στη διατάραξη της τάξης και συνδέεται με βαθύτερα κοινωνικά
 αίτια, έχοντας αντίκτυπο σε όλες τις δομές της κοινωνικοπολιτικής ζωής της
 χώρας. Η ρατσιστική αυτή διάθεση και οι ομαδικές συγκρούσεις οπαδών εντός και 
 εκτός γηπέδων, καταλήγουν, πολλές φορές, σε δολοφονίες, οι οποίες ουσιαστικά
@@ -599,51 +647,52 @@ Voting Websites).
 \fancyhead{}
 \markboth{}{}{}
 
-\bibitem{SchoolDisch}  Adams T.A., The status of school discipline and
+\bibitem{SchoolDisch}
+Adams T.A., The status of school discipline and
 violence, Annals of The American Academy of Politicical and Social
-Science Publication, 2000.
-\bibitem{StudentsP} 
+Science, Publication, 2000.
+\bibitem{StudentsP}
 Agatston P., Kowalski R., Limber S., Students’ perspectives on cyberbullying,
-Journal of Adolescent Health Publication, 2007.
+Journal of Adolescent Health, Publication, 2007.
 \bibitem{BConditions}
 Ah Y., Jeong W. και Cha T., The study on the actual conditions of bullying and
-the phychosocial factors affecting bullying behavior, Journal of Fish and
-Marine Science of Education Publication, 2005.
+the phychosocial factors affecting bullying behavior, Journal of Fish and Marine
+Science of Education, Publication, 2005.
 \bibitem{AEbullyingnterv}
-Andreou E., Didaskalou E. και Vlachou, A., Evaluating the effectiveness
-of a curriculum-based anti-bullying intervention program in Greek primary
-schools, Educational Psychology Publication, 2007.
+Andreou E., Didaskalou E. και Vlachou, A., Evaluating the effectiveness of a
+curriculum-based anti-bullying intervention program in Greek primary schools,
+Educational Psychology, Publication, 2007.
 \bibitem{Manipulate}
 Björkqvist K., Lagerspetz K. M., Kaukiainen A., Do girls manipulate and boys
 fight? developmental trends in regard to direct and indirect aggression, Journal
-of  Aggressive Behavior Publication, 1992.
+of  Aggressive Behavior, Publication, 1992.
 \bibitem{LinksSocial}
 Camodeca M., Goossens F. A., Schuengel C., Meerum Terwogt, M., Links
 between social information processing in middle childhood and involvement in
-bullying, Aggressive Behavior Publication, 29, 116-127, 2003.
+bullying, Aggressive Behavior, Publication, 29, 116-127, 2003.
 \bibitem{Cyberguise}
 Campbell, Marilyn A.,  Cyber bullying: An old problem in a new guise ?,
-Australian Journal of Guidance and Counselling Publication, 15(1):68-76, 2005.
+Australian Journal of Guidance and Counselling, Publication,  2005.
 \bibitem{MiddleReports}
- Casey-Cannon S., Hayward C., Gowen K., Middle school girls' reports of peef 
- victimization: Concerns, consequences and implications.Professional School
- Counceling,  The Journal Of Early Adolescence Publication, 2001.
+Casey-Cannon S., Hayward C., Gowen K., Middle school girls' reports of peef 
+victimization: Concerns, consequences and implications.Professional School
+Counceling,  The Journal Of Early Adolescence, Publication, 2001.
 \bibitem{Marital}
- Davies Patrick T., Cummings E. M., Marital conflict and child adjustment: An
-emotional security hypothesis, Psychological Bulletin Publication, 1994.
+Davies Patrick T., Cummings E. M., Marital conflict and child adjustment: An
+emotional security hypothesis, Psychological Bulletin, Publication, 1994.
 \bibitem{CVCrime}
- Eitle D., Turner R.J., Exposure to CV and young adult crime: The effects of
+Eitle D., Turner R.J., Exposure to CV and young adult crime: The effects of
  witnessing violence, traumatic victimization, and other stresful life events, Journal of
- Research in Crime and Delinquency Publication, 2002.
+ Research in Crime and Delinquency, Publication, 2002.
  \bibitem{KenRigby}
 Ken Rigby, Bullying in Schools and What to Do about It: Revised and Updated,
-Aust Council for Ed Research Publication, 2007.
+Aust Council for Ed Research, Publication, 2007.
 \bibitem{AtlasBullyingClassroom}
 Rona S.,  Atlas and Debra, J. Pepler, Observations of Bullying in the Classroom,
-The Journal of Educational Research Publication, 1998.
+The Journal of Educational Research, Publication, 1998.
 \bibitem{CyberBullying}
 Slonje R., Smith P.K., Cyberbullying: another main type of bullying ?,
-Scandinavian Journal of Phychology Publication, 2008.
+Scandinavian Journal of Phychology, Publication, 2008.
 \bibitem{Nbullying}
 Smith P. K., Morita Y., Junger-Tas J., Olweus D., Catalano R., και  Slee
 P., The Nature of School Bullying: A Cross-national Perspective, Routledge
@@ -651,7 +700,7 @@ Publication, Andover, U.K., 1998.
 \bibitem{OnlineBullying}
  Wolak J., Mitchell K.J., Finkelhor D., Does online harassment constitute
  bullying? An exploration of online harassment by known peers and online-only
- contacts, Journal of the Adolescent Health Publication, 2007.
+ contacts, Journal of the Adolescent Health, Publication, 2007.
 % \bibitem{AEbullying812}
 %  Andreou E. Bully/victim Problems and their association with
 % Psychological Constructs in 8 to 12 year-olds, εκδ. Aggressive Behaviour, 2000.
@@ -677,9 +726,8 @@ Publication, Andover, U.K., 1998.
 Πετρόπουλος Ν., Παπαστυλιανού Α., Μορφές επιθετικότητας, βίας και διαμαρτυρίας
 στο σχολείο, εκδ. Παιδαγωγικό Ινστιτούτο, Αθήνα, 2001.
 \end{thebibliography}
-%	\maketitle
-%\addcontentsline{toc}{section}{Unnumbered Section}
-
-
+\pagebreak\centering\setlength{\parindent}{10pt} 
+\addcontentsline{toc}{chapter}{Περιεχόμενα}
+%\renewcommand{\contentsname}{Περιεχόμενα}
 \tableofcontents
 \end{document}
