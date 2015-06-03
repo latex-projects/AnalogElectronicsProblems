@@ -5,8 +5,7 @@ deploy:
   provider: releases
   api_key:
     secure: R7Uw5amCwSyKSYFCJLPq4GMA/vcZuC7XrhJM5pOhQ/WkMj8OC+WbsaUBHkr7MkAnjYJVMZSOR8tveI7rFKvrWbspEO3R5hPhm2xkEhfnMQafJcjM15nirk+n9Yw5yodu3PH0Y924ZZiQkLpiNAIzaIz2VVlpmr/Y6cBDdLwgVgI=
-  file: 
-- _build/document.pdf
+  file: _build/document.pdf
   on:
     tags: true
     repo: dev23cc/PedagogicsProjectPresentation
