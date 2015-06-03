@@ -1,3 +1,5 @@
+install:
+- sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended 
 script:
 - mkdir _build
 - xelatex -output-directory _build document.tex
