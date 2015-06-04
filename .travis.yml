@@ -1,4 +1,5 @@
 install:
+- wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu
 - wget http://tug.ctan.org/systems/texlive/Images/texlive.iso
 - chmod +x ./install-tl-ubuntu
 - sudo add-apt-repository -y ppa:frol/zip-i18n
