@@ -1,9 +1,10 @@
 install:
 - wget http://tug.ctan.org/systems/texlive/Images/texlive.iso
+- wget https://gist.githubusercontent.com/dev23cc/ee158185167cc2499ec2/raw/6d62a94977c57ff8a1d4da09e2737b3b620313aa/texlive.profile
 - sudo apt-get install p7zip-full
 - 7z x texlive.iso
 - chmod +x install-tl
-- sudo ./install-tl
+- sudo ./install-tl --profile=texlive.profile
 - source /etc/environment
 script:
 - mkdir _build
