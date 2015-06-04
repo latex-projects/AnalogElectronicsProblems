@@ -5,10 +5,9 @@ install:
 - 7z x texlive.iso
 - chmod +x install-tl
 - sudo ./install-tl --profile=texlive.profile
-- source /etc/environment
 script:
 - mkdir _build
-- xelatex -output-directory _build document.tex
+- /usr/local/texlive/2014/bin/x86_64-linux/xelatex -output-directory=_build document.tex
 deploy:
   provider: releases
   api_key:
