@@ -7,6 +7,7 @@ install:
 - sudo ./install-tl --profile=texlive.profile
 script:
 - mkdir _build
+- source /etc/environment
 - /usr/local/texlive/2014/bin/x86_64-linux/xelatex -output-directory=_build document.tex
 deploy:
   provider: releases
