@@ -1,11 +1,15 @@
 install:
 - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu
 - wget http://tug.ctan.org/systems/texlive/Images/texlive.iso
+- sudo apt-get install p7zip-full
+- 7z x texlive.iso
 - chmod +x ./install-tl-ubuntu
 - sudo add-apt-repository -y ppa:frol/zip-i18n
 - sudo apt-get update
 - sudo apt-get install libfile-fcntllock-perl gcc equivs libwww-perl fontconfig unzip
-- sudo ./install-tl-ubuntu --iso texlive.iso 
+- cd texlive
+- sudo ./install-tl
+- source /etc/environment
 script:
 - mkdir _build
 - xelatex -output-directory _build document.tex
