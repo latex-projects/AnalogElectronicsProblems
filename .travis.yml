@@ -1,5 +1,5 @@
 install:
-- sudo apt-get install p7zip-full texlive-fonts-recommended fonts-gfs-didot-classic ttf-* otf-*
+- sudo apt-get install p7zip-full texlive-fonts-recommended fonts-gfs-didot-classic ttf-gfs-didot-classic ttf-gfs-complutum ttf-gfs-solomos ttf-gfs-baskerville ttf-gfs-neohellenic ttf-gfs-didot
 - wget http://tug.ctan.org/systems/texlive/Images/texlive.iso
 - wget https://gist.githubusercontent.com/dev23cc/ee158185167cc2499ec2/raw/6d62a94977c57ff8a1d4da09e2737b3b620313aa/texlive.profile
 - 7z x texlive.iso
