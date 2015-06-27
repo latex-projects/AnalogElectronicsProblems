@@ -1,14 +1,6 @@
 install:
 - latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
 - git archive --format zip --output source.zip  $latestTag
-- sudo apt-get install p7zip-full fonts-gfs-didot-classic ttf-gfs-didot-classic ttf-gfs-complutum ttf-gfs-solomos ttf-gfs-baskerville ttf-gfs-neohellenic ttf-gfs-didot
-- wget http://tug.ctan.org/systems/texlive/Images/texlive.iso
-- wget https://gist.githubusercontent.com/dev23cc/ee158185167cc2499ec2/raw/6d62a94977c57ff8a1d4da09e2737b3b620313aa/texlive.profile
-- 7z x texlive.iso
-- chmod +x install-tl
-- sudo ./install-tl --profile=texlive.profile
-script:
-- mkdir _build
 - FIRSTTAG=$(git describe --tags --always --dirty='-*' 2>/dev/null)
 - RELTAG=$(git describe --tags --long --always --dirty='-*' --match '[0-9]*.*' 2>/dev/null)
 - git --no-pager log -1 --date=short --decorate=short \
@@ -29,7 +21,14 @@ script:
         firsttagdescribe={$FIRSTTAG},
         reltag={$RELTAG}
     ]{gitexinfo}" HEAD > .git/gitHeadInfo.gin
-- source /etc/environment
+- sudo apt-get install p7zip-full fonts-gfs-didot-classic ttf-gfs-didot-classic ttf-gfs-complutum ttf-gfs-solomos ttf-gfs-baskerville ttf-gfs-neohellenic ttf-gfs-didot
+- wget http://tug.ctan.org/systems/texlive/Images/texlive.iso
+- wget https://gist.githubusercontent.com/dev23cc/ee158185167cc2499ec2/raw/6d62a94977c57ff8a1d4da09e2737b3b620313aa/texlive.profile
+- 7z x texlive.iso
+- chmod +x install-tl
+- sudo ./install-tl --profile=texlive.profile
+script:
+- mkdir _build
 - /usr/local/texlive/2014/bin/x86_64-linux/xelatex -output-directory=_build document.tex
 deploy:
   provider: releases
