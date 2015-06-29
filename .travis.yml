@@ -30,6 +30,7 @@ install:
 script:
 - mkdir _build
 - /usr/local/texlive/2014/bin/x86_64-linux/xelatex -output-directory=_build document.tex
+- /usr/local/texlive/2014/bin/x86_64-linux/xelatex -output-directory=_build document.tex
 deploy:
   provider: releases
   api_key:
@@ -37,4 +38,4 @@ deploy:
   file: _build/document.pdf
   on:
     tags: true
-    repo: latex-projects/PedagogicsProjectPresentation
+    repo: latex-projects/ProjectTemplate
