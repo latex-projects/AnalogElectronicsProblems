@@ -38,5 +38,5 @@ deploy:
   file: _build/document.pdf
   on:
     tags: true
-    repo: latex-projects/PedagogicsProjectPresentation
+    repo: latex-projects/ProjectTemplate
 
