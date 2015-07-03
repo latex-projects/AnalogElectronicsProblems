@@ -4,6 +4,12 @@ ragged2e,blindtext,indentfirst,graphicx,
 xunicode,xltxtra,xgreek,lipsum,siunitx,
 hyphenat,etoolbox,tocloft}
 %\usepackage[nodayofweek]{datetime}
+%\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+\usepackage{attachfile2}
 \usepackage{datetime}
 %\newdate{date}{}{11}{2014}
 %\date{\displaydate{date}}
@@ -197,4 +203,5 @@ John Doe, The life of John Doe, John Doe Publications, 2000.
 \addcontentsline{toc}{chapter}{Περιεχόμενα}
 %\renewcommand{\contentsname}{Περιεχόμενα}
 \tableofcontents
+%\attachfile[icon=Paperclip]{source.zip}{Project Source Code}
 \end{document}
