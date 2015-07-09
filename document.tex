@@ -2,7 +2,8 @@
 \usepackage{fontspec,fancyhdr,
 ragged2e,blindtext,indentfirst,graphicx,
 xunicode,xltxtra,xgreek,lipsum,siunitx,
-hyphenat,etoolbox,tocloft}
+hyphenat,etoolbox,tocloft,amsmath}
+\usepackage[americaninductors]{circuitikz}
 %\usepackage[nodayofweek]{datetime}
 %\usepackage{xcolor}
 \usepackage{hyperref}
@@ -161,10 +162,130 @@ July 2015
 
 \indent Θέμα 1ο \par
 \indent Δίνεται μετασχηματιστής χωρίς μεσαία λήψη, ο οποίος όταν συνδέεται στο δίκτυο (220 V, 50 Hz) παράγει στα άκρα του δευτερεύοντος πηνίου τάση ενεργού τιμής 22 V. Να σχεδιάσετε ανορθωτική διάταξη η οποία να παράγει σε φορτίο 500 Ω τάση με κυμάτωση μικρότερη απο 1,0 V.
+\par \textbf{Λύση}\\
+Διαβάζοντας τα δεδομένα της άσκησης, βλέπουμε οτι η μόνη τιμή που λείπει, για να σχεδιάσουμε το κύκλωμα, είναι αυτή του πυκνωτή.
+ Χρησιμοποιούμε τον τύπο {\sloppy ${ V_{rms} = \frac{V_p}{\sqrt{2}} }$  για να μετατρέψουμε τα $V_{rms}$ σε $V_{p-p}$}
+\begin{gather*}
+   \label{eq:someequation} V_{rms} = \frac{V_p}{\sqrt{2}}
+   \Longleftrightarrow \frac{22}{1} = \frac{V_p}{\sqrt{2}} \Longleftrightarrow V_p = 22*1,41 = 31,02 \,V
+   \\\Longleftrightarrow V_p=31,02 V \,\,\,V_{p-p}= 2 * V_p = 2 *31,02 = 62,04 \,V \Longleftrightarrow
+   V_{p-p} = 62,04 \,V
+\end{gather*}
+\par Στη συνέχεια χρησιμοποιώντας τον νόμο του Ohm, υπολογίζουμε το ρεύμα της αντίστασης φορτίου $I_L$.\\
+{\sloppy ${V=I*R\Longleftrightarrow I_L = \frac{V_{Lp-p}}{R_L} \Longleftrightarrow I_L = \frac{62,04}{500} = 0,124 \,A
+\Longleftrightarrow I_L= 0,124 \, A \,\, \text{ή} \,\, 124 \,\text{mA}}$}\\
+\indent Έπειτα, χρησιμοποιούμε τον τύπο της τάση κυμάτωσης λύνωντας ως προς το πυκνωτή (C). Επειδή απο τα δεδομένα της άσκησης θέλουμε να έχουμε τάση κυμμάτωσης κάτω απο 1,0 V, θεωρούμε αιθαίρετα μια τιμή τάσης κυμάτωσης π.χ.(0,9 V) που είναι μικρότερη του 1,0 V.\\
+{\sloppy ${V_{ripple} = \frac{I_L}{fC} \Longleftrightarrow C = \frac{I_L}{V_rf} \Longleftrightarrow C = \frac{124}{0,9*50} = \frac{124}{45} = 2,7 \,\text{μF} }$ }
+\clearpage\indent Και στο τέλος σχεδιάζουμε το κύκλωμα\\
+\begin{tikzpicture}
+%\begin{circuitikz}[american currents]
+% the power source
+  \draw  (0,0) to[vsourcesin, l^=$220 V \,\,\\ 50Hz$] (0,2.1) {} ;
+% the transformer
+  \draw  (3,2.1) node[transformer core] (transformer1) (T){}
+  (T.A1) node[anchor=east] {}
+  (T.A2) node[anchor=east] {}
+  (T.B1) node[anchor=west] {}
+  (T.B2) node[anchor=west] {}
+  (T.base) node{}
+  (T.west) node{$$}
+  (T.east) node{$\,\,22 V$};
+% power source - transformer connection
+ \draw (T.A1) -- (0,2.1) ;
+  \draw (T.A2) -- (0,0) ;
+  % bridge rectifier
+  \draw (5,2.1) to[diode] (7,2.1) {};
+  \draw (5,2.1) to[diode] (5,0) {};
+  \draw (5,0) to[diode] (7,0){};
+  \draw (7,0) to[diode] (7,2.1){};
 
+%\draw node[circ] (c1) at(4.05,2.7){};
+\draw node[circ] (c3) at(7,2.1){};
+\draw node[circ] (c4) at(7,0){};
+\draw node[circ] (c4) at(5,0){};
+\draw node[circ] (c4) at(5,2.1){};
+
+\draw (T.B1) -- (5,2.1);
+
+%dc power cable
+\draw (7,2.1) -- (8,2.1);
+% dc ground
+  \draw (5,0) -- (5,-0.8) {};
+%ground
+\draw (5,-0.8) node[ground] (5,-0.035){};
+
+\draw (7,2.1) -- (10,2.1);
+
+\draw node[circ] (c2) at(4.05,-0.6){};
+\draw (T.B2) -- (c2){};
+\draw (c2) -- (7,-0.6) {};
+\draw (7,-0.6) -- (7,0) {};
+
+% the capacitor
+\draw (10,2.1) to[capacitor, l=$ 2.7 \mu F$] (10,0){};
+% dc cable betwwen resistor and capacitor
+\draw (10,2.1) -- (12,2.1);
+%the resisor
+\draw (12,2.1) to[resistor, l=$500\,\, \Omega$] (12,0){};
+% gnd cable betwwen resistor and capacitor
+\draw (10,0) -- (12,0);
+%gnd
+\draw (11,0) node[ground] (11, 0.035){};
+
+%  \draw (T.B1) -- (7,2.1);
+%(1,4) to [R] (2.5,4)
+%  \draw (0,0) node[op amp,yscale=-1] (opamp2) {}
+%  (opamp2.+) node[left ] {$v_+$}
+%  (opamp2.-) node[left ] {$v_-$}
+% (opamp2) -| (0,0) node[antenna]  {}
+%  ;
+%\end{circuitikz}
+\end{tikzpicture}
 \indent Θέμα 2ο \par
 α) Να υπολογίσετε την τάση εξόδου του παρακάτω κυκλώματος, κάνοντας όλους τους απαραίτητους υπολογισμούς.
  β) Να συμπληρώσετε το παρακάτω κύκλωμα με μια ακόμη βαθμίδα εξόδου, ώστε στη νέα έξοδο να προκύψει τάση διπλάσιας τιμής και με διαφορά φάσης 180o.
+
+
+
+\begin{tikzpicture}[scale=2]
+  \draw[color=black, thick]
+    (0,0) to [short,o-] (6,0){} % Baseline for connection to ground
+    % Input and ground
+    (0,1) node[]{\large{\textbf{INPUT}}}
+    % Connection of passive components
+    (5,0) node[ground]{} node[circ](4.5,0){}
+    (0,2) to [pC, l=$C_1$, o-] (0.5,2)
+    to [R,l=$R_1$,](1.5,2)
+    to node[short]{}(2.6,2)
+    (1.5,2) to [C, l=$C_2$, *-] (1.5,3) -| (5,3)
+    (2.2,2) to [R, l=$R_2$, *-*] (2.2,3)
+    (2.2,3) to [pC, l=$C_3$, *-] (2.2,5) -| (3,5)
+    % Transistor Bipolar Q1
+    (3,0) to [R,l=$R_5$,-*] (3,1.5)
+    to [Tnpn,n=npn1] (3,2.5)
+    (npn1.E) node[right=3mm, above=5mm]{$Q_1$} % Labelling the NPN transistor
+    (4,0) to [pC, l_=$C_4$, *-] (4, 1.5)--(3,1.5)
+    (2.2,0) to [vR, l=$R_3$, *-*] (2.2,2)
+    (3,2.5) to node[short]{}(3,3)
+    (3,5) to [pR, n=pot1, l_=$R_4$, *-] (3,3)
+    (3,5) to [R, l=$R_6$, *-] (5,5)
+    to [short,*-o](5,5.5) node[right]{$V_S=40 V$}
+    % Mosfet Transistors
+    (5,3) to [Tnigfetd,n=mos1] (5,5)
+    (mos1.B) node[anchor=west]{$Q_2$} % Labelling MOSFET Q2 Transistor
+    (pot1.wiper)  to [R, l=$R_7$] (4.5,4) -| (mos1.G)
+    (5,1.5) to [Tpigfetd,n=mos2] (5,2.5)
+    (5,0) to (mos2.S)
+    (3,2.5) to [R, l=$R_8$, *-] (4.5,2.5)
+    -| (mos2.G)
+    (mos2.B) node[anchor=west]{$Q_3$} % Labelling MOSFET Q3 Transistor
+    % Output
+    (6,3) to [pC, l=$C_5$,-*](5,3)
+    (6,3) to [short,-o] (6,2){}
+    (mos1.S)--(mos2.D)
+    (6,0) to [short,-o] (6,1){} node[above=7mm]{\large{\textbf{SPEAKER}}}
+    ;
+\end{tikzpicture}
 
 \indent Θέμα 3ο \par
 Να σχεδιασετε ενισχυτική βαθμίδα της οποίας το σημείο Q να βρίσκεται στο μέσο της dc γραμμής φορτίου. Η πόλωση της βαθμίδας γίνεται με διαιρέτη τάσης. Η τάση της πηγής είναι Vcc = 12 V, το ρεύμα του συλλέκτη ΙCQ = 5 mA και βdc = 200.
